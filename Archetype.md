@@ -1,8 +1,9 @@
 # Pentest Report for Archetype Box
+
 ## CVSS 3.1 Score:8.1 (High)
 
-### CWE-200: Exposure of Sensitive Information to an Unauthorized Actor
-### CWE-306: Missing Authentication for Critical Function
+**CWE-200: Exposure of Sensitive Information to an Unauthorized Actor**
+**CWE-306: Missing Authentication for Critical Function**
 
 Description: During our penetration test, we identified a Broken Access Control vulnerability via SMB, which allowed unauthorized access to sensitive data, including user credentials for the hosted database. Additionally, we discovered that the SQL server configuration lacked proper access controls, leading to the potential exposure of critical database information.
 
