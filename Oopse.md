@@ -311,7 +311,7 @@ check
 
 
 
-Finally, execute our 'bugtracker' from the 'tmp' directory.
+Finally, execute our 'bugtracker' from the 'tmp' directory and script will search for comand cat and inside 'tmp' will found file cat created by us.
 
 
 
