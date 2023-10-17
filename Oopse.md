@@ -47,11 +47,11 @@ We will list the site where we will find the gateway to the server, but first we
 
 
 
-![](/home/dodo/Documents/HTB/HTB_lab/HTB_labs/.Oopse_img/O.png)               
+![](/.Oopse_img/O.png)               
 
 And we found a path to the website's login page, so we visited it.
 
-![](/home/dodo/Documents/HTB/HTB_lab/HTB_labs/.Oopse_img/oo.png)
+![](/.Oopse_img/oo.png)
 
 Let's try our luck and try the combination admin/admin. 
 
@@ -63,7 +63,7 @@ What's left for us is to log in as a guest and take a look for some elevation of
 
 
 
-![](/home/dodo/Documents/HTB/HTB_lab/HTB_labs/.Oopse_img/ooo.png)
+![](/.Oopse_img/ooo.png)
 
 
 
@@ -71,7 +71,7 @@ Inside the 'Account' card, we see a table with users. When we check, we  found t
 
 
 
-![](/home/dodo/Documents/HTB/HTB_lab/HTB_labs/.Oopse_img/oooo.png)
+![](/.Oopse_img/oooo.png)
 
 
 
@@ -79,7 +79,7 @@ We also noticed a parameter within the link that we can manipulate. When we atte
 
 
 
-![](/home/dodo/Documents/HTB/HTB_lab/HTB_labs/.Oopse_img/ooooo.png)
+![](/.Oopse_img/ooooo.png)
 
 
 
@@ -100,7 +100,7 @@ Upgrade-Insecure-Requests: 1
 
 The 'uploads' section is intended only for administrators. With our  newfound admin website privileges, we can now send a PHP reverse shell  to the server.
 
-![](/home/dodo/Documents/HTB/HTB_lab/HTB_labs/.Oopse_img/ooooooo.png)
+![](/.Oopse_img/ooooooo.png)
 
 ```          http
 Host: 10.129.245.13
