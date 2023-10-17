@@ -39,7 +39,7 @@ Open SSH port observed, but we don't have valid credentials.
 We visit the IP using the web browser where we face
 a website.
 
-​          ![](/HTB_labs/.Oopse_img/Oopse1.png)
+​          ![](/.Oopse_img/Oopse1.png)
 
 
 
