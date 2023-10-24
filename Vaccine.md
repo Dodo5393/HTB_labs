@@ -63,7 +63,7 @@ We can see an open SSH port, but we don't have the login credentials.  Next, we 
 
 
 
-![](/home/dodo/Documents/HTB/HTB_lab/HTB_labs/.Vaccine_img/login.png)
+![](/.Vaccine_img/login.png)
 
 
 
