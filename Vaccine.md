@@ -63,7 +63,7 @@ We can see an open SSH port, but we don't have the login credentials.  Next, we 
 
 
 
-![](/home/dodo/Documents/HTB/HTB_lab/HTB_labs/.Vaccine_img/login.png)
+![](/.Vaccine_img/login.png)
 
 We can see that the login form has no SQL injection errors, so we are  going to check the third open port, FTP, to examine some valuable data.
 
